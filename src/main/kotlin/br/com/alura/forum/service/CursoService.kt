@@ -12,7 +12,13 @@ class CursoService(var cursos: List<Curso>) {
             name = "Kotlin",
             category = "Programação"
         )
-        cursos = Arrays.asList(curso)
+        val curso2 = Curso(
+            id = 2,
+            name = "HTML e CSS",
+            category = "FrontEnd"
+        )
+
+        cursos = Arrays.asList(curso, curso2)
     }
 
     fun searchforID(id: Long): Curso {
