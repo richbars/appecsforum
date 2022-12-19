@@ -1,11 +1,9 @@
 package br.com.alura.forum.controller
 
-import br.com.alura.forum.dto.NovoTopicoDTO
-import br.com.alura.forum.model.Curso
+import br.com.alura.forum.dto.NovoTopicoForm
+import br.com.alura.forum.dto.TopicoView
 import br.com.alura.forum.model.Topico
-import br.com.alura.forum.model.Usuario
 import br.com.alura.forum.service.TopicoService
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Retry.Topic
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -14,7 +12,7 @@ import java.util.*
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    fun list(): List<Topico> {
+    fun list(): List<TopicoView> {
         return service.list()
     }
 
@@ -24,7 +22,7 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PostMapping
-    fun register(@RequestBody dto: NovoTopicoDTO) {
+    fun register(@RequestBody dto: NovoTopicoForm) {
         service.register(dto)
     }
 }

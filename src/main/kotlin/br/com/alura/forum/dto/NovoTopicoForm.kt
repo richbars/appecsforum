@@ -1,6 +1,6 @@
 package br.com.alura.forum.dto
 
-data class NovoTopicoDTO(
+data class NovoTopicoForm(
     val title: String,
     val message: String,
     val idCurso: Long,
