@@ -4,6 +4,7 @@ import br.com.alura.forum.dto.NovoTopicoForm
 import br.com.alura.forum.dto.TopicoView
 import br.com.alura.forum.model.Topico
 import br.com.alura.forum.service.TopicoService
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -22,7 +23,7 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PostMapping
-    fun register(@RequestBody dto: NovoTopicoForm) {
+    fun register(@RequestBody @Valid dto: NovoTopicoForm) {
         service.register(dto)
     }
 }
