@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter
 val current = LocalDateTime.now()
 val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
 data class Topico(
-    val id: Long? = null,
+    var id: Long? = null,
     val title: String,
     val message: String,
     val dataCreate: String = current.format(formatter),
