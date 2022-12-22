@@ -1,5 +1,6 @@
 package br.com.alura.forum.service
 
+import br.com.alura.forum.dto.AtualizacaoTopicoForm
 import br.com.alura.forum.dto.NovoTopicoForm
 import br.com.alura.forum.dto.TopicoView
 import br.com.alura.forum.mapper.TopicoFormMapper
@@ -27,6 +28,24 @@ class TopicoService(private var sanduba: List<Topico> = ArrayList(), private val
         val sabb = topicoFormMapper.map(form)
         sabb.id = sanduba.size.toLong() + 1
         sanduba = sanduba.plus(sabb)
+    }
+
+    fun update(form: AtualizacaoTopicoForm){
+        val sandubinha = sanduba.stream().filter({
+                t -> t.id == form.id
+        }).findFirst().get()
+        sanduba = sanduba.minus(sandubinha).plus(Topico(
+            id = form.id,
+            title = form.title,
+            message = form.message,
+            author = sandubinha.author,
+            course = sandubinha.course,
+            responses = sandubinha.responses,
+            status = sandubinha.status,
+            dataCreate = sandubinha.dataCreate
+
+
+        ))
     }
 }
 
