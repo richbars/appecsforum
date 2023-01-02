@@ -23,18 +23,19 @@ class TopicoService(private var sanduba: List<Topico> = ArrayList(), private val
         }).findFirst().get()
     }
 
-    fun register(form: NovoTopicoForm){
+    fun register(form: NovoTopicoForm): TopicoView{
 
         val sabb = topicoFormMapper.map(form)
         sabb.id = sanduba.size.toLong() + 1
         sanduba = sanduba.plus(sabb)
+        return topicoViewMapper.map(sabb)
     }
 
-    fun update(form: AtualizacaoTopicoForm){
+    fun update(form: AtualizacaoTopicoForm): TopicoView{
         val sandubinha = sanduba.stream().filter({
                 t -> t.id == form.id
         }).findFirst().get()
-        sanduba = sanduba.minus(sandubinha).plus(Topico(
+        val topicoAtualizado = Topico(
             id = form.id,
             title = form.title,
             message = form.message,
@@ -42,10 +43,16 @@ class TopicoService(private var sanduba: List<Topico> = ArrayList(), private val
             course = sandubinha.course,
             responses = sandubinha.responses,
             status = sandubinha.status,
-            dataCreate = sandubinha.dataCreate
+            dataCreate = sandubinha.dataCreate)
+        sanduba = sanduba.minus(sandubinha).plus(topicoAtualizado)
+        return topicoViewMapper.map(topicoAtualizado)
+    }
 
-
-        ))
+    fun delete(id: Long) {
+        val sandubinha = sanduba.stream().filter({
+                t -> t.id == id
+        }).findFirst().get()
+        sanduba = sanduba.minus(sandubinha)
     }
 }
 
